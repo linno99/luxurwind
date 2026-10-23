@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>吳贞妮 Linno | 拉蒂設計 Luxurwind</title>
+    <title>吳貞妮 Linno | 拉蒂設計 Luxurwind</title>
     <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -132,19 +132,6 @@
             font-weight: 500;
         }
 
-        /* 代表品牌 & 簡介小卡 */
-        .bio-box {
-            background: #FFF;
-            border-radius: var(--radius-md);
-            padding: 14px;
-            margin-bottom: 24px;
-            border-left: 4px solid var(--brand-coral);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            font-size: 0.88rem;
-            line-height: 1.5;
-            color: #4B5563;
-        }
-
         /* 分割線 */
         .section-divider {
             display: flex;
@@ -165,26 +152,260 @@
             padding: 0 12px;
         }
 
-        /* 快捷按鈕區 (LINE/vCard) */
+        /* 三大領域卡片列表 */
+        .service-card {
+            background: #FFF;
+            border-radius: var(--radius-md);
+            padding: 18px;
+            margin-bottom: 14px;
+            border: 1px solid #E5E7EB;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .service-card:hover, .service-card:active {
+            transform: translateY(-2px);
+            border-color: var(--brand-teal);
+            box-shadow: 0 8px 20px rgba(31, 183, 166, 0.15);
+        }
+        .service-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        .service-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .service-title i {
+            color: var(--brand-coral);
+        }
+        .service-desc {
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        /* 快捷按鈕區 (LINE/分享，改至最下方，為 2 欄排列) */
         .action-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 24px;
+            margin-bottom: 12px;
         }
         .btn-action {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
             justify-content: center;
-            padding: 12px 8px;
+            gap: 8px;
+            padding: 14px 12px;
             border-radius: var(--radius-md);
             background: #FFF;
             border: 1px solid #E5E7EB;
             color: var(--text-main);
             text-decoration: none;
-            font-size: 0.78rem;
+            font-size: 0.9rem;
             font-weight: 600;
             transition: all 0.2s ease;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .btn-action i {
+            font-size: 1.2rem;
+        }
+        .btn-action.line { 
+            color: #FFF; 
+            background: #06C755; 
+            border-color: #06C755;
+        }
+        .btn-action.share { 
+            color: var(--brand-coral); 
+            border-color: rgba(254, 122, 81, 0.3);
+            background: rgba(254, 122, 81, 0.05);
+        }
+        .btn-action:active { transform: scale(0.96); }
+
+        /* 全螢幕/彈窗 Portfolio Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            width: 100%;
+            max-width: 480px;
+            max-height: 85vh;
+            background: #FFF;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            padding: 24px 20px;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .btn-close {
+            background: #F3F4F6;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--text-sub);
+            font-size: 1rem;
+        }
+
+        /* 案例清單項目 */
+        .portfolio-item {
+            padding: 14px;
+            background: #F9FAFB;
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            border: 1px solid #F3F4F6;
+        }
+        .portfolio-item-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+        .portfolio-item-desc {
+            font-size: 0.85rem;
+            color: #4B5563;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .portfolio-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            background: rgba(31, 183, 166, 0.1);
+            color: var(--brand-teal-dark);
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* 頁尾 */
+        .footer-text {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <!-- 品牌標頭 -->
+        <div class="brand-bar">
+            <div class="brand-logo-text">LUXURWIND</div>
+            <div class="brand-sub">拉蒂設計</div>
+        </div>
+
+        <!-- 個人資訊 (動態讀取 Google Sheet) -->
+        <div class="profile-header">
+            <div class="avatar-wrapper">
+                <div class="avatar-ring"></div>
+                <img id="avatar" class="avatar-img" src="https://res.cloudinary.com/c05zlkva/image/upload/v1792724482/%E5%A4%A7%E9%A0%AD%E8%B2%BC.jpg" alt="吳貞妮 Linno">
+            </div>
+            <h1 id="profile-name" class="profile-name">吳貞妮 Linno</h1>
+            <div id="profile-title" class="profile-title">拉蒂設計 創辦人 / 品牌設計師</div>
+            <div id="profile-slogan" class="profile-slogan">文創 × 故事 × 藝術 × 設計</div>
+        </div>
+
+        <!-- 分割線：服務與案例 -->
+        <div class="section-divider">
+            <span>三大核心服務與作品集</span>
+        </div>
+
+        <!-- 三大領域按鈕卡片 (去除右上橘色項目統計) -->
+        <div class="service-card" onclick="openPortfolio('brand')">
+            <div class="service-card-header">
+                <span class="service-title"><i class="fa-solid fa-palette"></i> 品牌視覺與影像數位</span>
+            </div>
+            <div class="service-desc">標誌識別 CIS / 商業包裝 / 貼圖 IP / 影音動畫</div>
+        </div>
+
+        <div class="service-card" onclick="openPortfolio('story')">
+            <div class="service-card-header">
+                <span class="service-title"><i class="fa-solid fa-book-open"></i> 故事劇場與情境策畫</span>
+            </div>
+            <div class="service-desc">展覽主視覺 / 文化繪本 / 節慶故事禮品</div>
+        </div>
+
+        <div class="service-card" onclick="openPortfolio('event')">
+            <div class="service-card-header">
+                <span class="service-title"><i class="fa-solid fa-wand-magic-sparkles"></i> 活動整合與互動體驗</span>
+            </div>
+            <div class="service-desc">展場 AI 互動 IP / 跨域營隊 / ESG 體驗課程 / 似顏繪</div>
+        </div>
+
+        <!-- 快捷動作按鈕 (放置在最下方：加 LINE & 分享名片) -->
+        <div class="action-grid">
+            <a id="line-link" href="https://line.me/ti/p/~kkk112233k" target="_blank" class="btn-action line">
+                <i class="fa-brands fa-line"></i>
+                加 LINE
+            </a>
+            <button onclick="shareCard()" class="btn-action share">
+                <i class="fa-solid fa-share-nodes"></i>
+                分享名片
+            </button>
+        </div>
+
+        <div class="footer-text">
+            © 2026 Luxurwind. All rights reserved.
+        </div>
+    </div>
+
+    <!-- 作品集彈窗 Modal -->
+    <div id="portfolio-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="modal-category-title" class="modal-title">案例展示</div>
+                <button class="btn-close" onclick="closePortfolio()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="modal-portfolio-list">
+                <!-- 動態注入案例清單 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 串接 Google Sheet API 腳本 -->
+    <script>
+        // 您的 Google Sheet ID
+        const GOOGLE_SHEET_ID = '1g7_HsReMbti7OlpdnoMkUfrNd6G4TsyBReo9PW9SO-8';
+
+        //
