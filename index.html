@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>吳貞妮 Linno | 拉蒂設計 Luxurwind</title>
-    
+
     <!-- LINE / FB 分享縮圖與卡片資訊 (OG Meta Tags) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="吳貞妮 Linno | 拉蒂設計 Luxurwind">
@@ -15,7 +15,7 @@
     <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- LINE LIFF SDK -->
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
@@ -51,7 +51,7 @@
             align-items: flex-start;
             padding: 20px 12px;
             color: var(--text-main);
-            background-image: 
+            background-image:
                 radial-gradient(at 0% 0%, rgba(31, 183, 166, 0.2) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(254, 122, 81, 0.2) 0px, transparent 50%);
             background-attachment: fixed;
@@ -71,10 +71,7 @@
             overflow: hidden;
         }
 
-        .brand-bar {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        .brand-bar { text-align: center; margin-bottom: 20px; }
         .brand-logo-text {
             font-size: 1.2rem;
             font-weight: 700;
@@ -84,22 +81,10 @@
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
         }
-        .brand-sub {
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            letter-spacing: 1px;
-        }
+        .brand-sub { font-size: 0.8rem; color: var(--text-sub); letter-spacing: 1px; }
 
-        .profile-header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        .avatar-wrapper {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 16px;
-        }
+        .profile-header { text-align: center; margin-bottom: 24px; }
+        .avatar-wrapper { position: relative; width: 110px; height: 110px; margin: 0 auto 16px; }
         .avatar-img {
             width: 100%;
             height: 100%;
@@ -115,18 +100,8 @@
             background: var(--bg-gradient);
             z-index: -1;
         }
-        .profile-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 4px;
-        }
-        .profile-title {
-            font-size: 0.95rem;
-            color: var(--brand-teal-dark);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
+        .profile-name { font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+        .profile-title { font-size: 0.95rem; color: var(--brand-teal-dark); font-weight: 600; margin-bottom: 8px; }
         .profile-slogan {
             display: inline-block;
             font-size: 0.82rem;
@@ -152,9 +127,7 @@
             height: 1px;
             background: #E5E7EB;
         }
-        .section-divider span {
-            padding: 0 12px;
-        }
+        .section-divider span { padding: 0 12px; }
 
         .service-card {
             background: #FFF;
@@ -173,12 +146,7 @@
             border-color: var(--brand-teal);
             box-shadow: 0 8px 20px rgba(31, 183, 166, 0.15);
         }
-        .service-card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 6px;
-        }
+        .service-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
         .service-title {
             font-size: 1rem;
             font-weight: 700;
@@ -187,14 +155,8 @@
             align-items: center;
             gap: 8px;
         }
-        .service-title i {
-            color: var(--brand-coral);
-        }
-        .service-desc {
-            font-size: 0.82rem;
-            color: var(--text-sub);
-            line-height: 1.4;
-        }
+        .service-title i { color: var(--brand-coral); }
+        .service-desc { font-size: 0.82rem; color: var(--text-sub); line-height: 1.4; }
 
         .action-grid {
             display: grid;
@@ -221,16 +183,10 @@
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
-        .btn-action i {
-            font-size: 1.2rem;
-        }
-        .btn-action.line { 
-            color: #FFF; 
-            background: #06C755; 
-            border-color: #06C755;
-        }
-        .btn-action.share { 
-            color: var(--brand-coral); 
+        .btn-action i { font-size: 1.2rem; }
+        .btn-action.line { color: #FFF; background: #06C755; border-color: #06C755; }
+        .btn-action.share {
+            color: var(--brand-coral);
             border-color: rgba(254, 122, 81, 0.3);
             background: rgba(254, 122, 81, 0.05);
         }
@@ -246,9 +202,7 @@
             justify-content: center;
             align-items: flex-end;
         }
-        .modal.active {
-            display: flex;
-        }
+        .modal.active { display: flex; }
         .modal-content {
             width: 100%;
             max-width: 480px;
@@ -272,11 +226,7 @@
             padding-bottom: 12px;
             border-bottom: 1px solid #E5E7EB;
         }
-        .modal-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
+        .modal-title { font-size: 1.15rem; font-weight: 700; color: var(--text-main); }
         .btn-close {
             background: #F3F4F6;
             border: none;
@@ -289,24 +239,27 @@
         }
 
         .portfolio-item {
+            display: block;
             padding: 14px;
             background: #F9FAFB;
             border-radius: var(--radius-md);
             margin-bottom: 12px;
             border: 1px solid #F3F4F6;
+            color: inherit;
+            text-decoration: none;
         }
-        .portfolio-item-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 4px;
+        a.portfolio-item:active { transform: scale(0.98); border-color: var(--brand-teal); }
+        .portfolio-thumb {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background: #E5E7EB;
         }
-        .portfolio-item-desc {
-            font-size: 0.85rem;
-            color: #4B5563;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
+        .portfolio-item-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+        .portfolio-item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 8px; line-height: 1.4; }
         .portfolio-tag {
             display: inline-block;
             font-size: 0.72rem;
@@ -316,13 +269,29 @@
             border-radius: 6px;
             font-weight: 600;
         }
-
-        .footer-text {
-            text-align: center;
-            font-size: 0.75rem;
-            color: #9CA3AF;
-            margin-top: 16px;
+        .portfolio-go {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--brand-coral-dark);
         }
+
+        .footer-text { text-align: center; font-size: 0.75rem; color: #9CA3AF; margin-top: 16px; }
+
+        /* 從 LINE 卡片按鈕進來（?go=）時的單一作品頁 */
+        .go-screen { display: none; width: 100%; max-width: 440px; }
+        body.go-mode .card-container { display: none; }
+        body.go-mode .go-screen { display: block; }
+        .go-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+        }
+        .go-status { text-align: center; color: var(--text-sub); font-size: 0.85rem; margin-bottom: 14px; }
+        .go-actions { display: grid; gap: 10px; margin-top: 16px; }
     </style>
 </head>
 <body>
@@ -368,9 +337,8 @@
             <div class="service-desc">展場 AI 互動 IP / 跨域營隊 / ESG 體驗課程 / 似顏繪</div>
         </div>
 
-        <!-- 網頁底部按鈕 -->
         <div class="action-grid">
-            <a id="line-link" href="https://line.me/ti/p/~kkk112233k" target="_blank" class="btn-action line">
+            <a id="line-link" href="https://line.me/ti/p/~kkk112233k" target="_blank" rel="noopener" class="btn-action line">
                 <i class="fa-brands fa-line"></i>
                 加 LINE
             </a>
@@ -380,10 +348,11 @@
             </button>
         </div>
 
-        <div class="footer-text">
-            © 2026 Luxurwind. All rights reserved.
-        </div>
+        <div class="footer-text">© 2026 Luxurwind. All rights reserved.</div>
     </div>
+
+    <!-- 從 LINE 卡片點案例按鈕進來時顯示 -->
+    <div id="go-screen" class="go-screen"></div>
 
     <!-- 作品集彈窗 Modal -->
     <div id="portfolio-modal" class="modal">
@@ -397,241 +366,323 @@
     </div>
 
     <script>
+        // ====== 設定區 ======
         const GOOGLE_SHEET_ID = '1g7_HsReMbti7OlpdnoMkUfrNd6G4TsyBReo9PW9SO-8';
         const LIFF_ID = '2012168875-2P11bla1';
+        const SITE_URL = 'https://linno99.github.io/luxurwind/';
 
-        // 初始化 LIFF
-        window.addEventListener('DOMContentLoaded', () => {
-            if (LIFF_ID) {
-                liff.init({ liffId: LIFF_ID })
-                    .then(() => { console.log('LIFF 初始化成功'); })
-                    .catch(err => { console.log('LIFF 初始化失敗', err); });
-            }
-            loadSheetData().then(() => {
-                const urlParams = new URLSearchParams(window.location.search);
-                const cat = urlParams.get('cat');
-                if (cat && ['brand', 'story', 'event'].includes(cat)) {
-                    setTimeout(() => { openPortfolio(cat); }, 300);
-                }
+        // true ：LINE 卡片按鈕先到本站 ?go=，再依試算表「最新」Link 跳轉
+        //        （好處：已經傳出去的舊卡片，之後改試算表連結也會生效）
+        // false：LINE 卡片按鈕直接寫死試算表當下的 Link（少一次跳轉，但舊卡片不會更新）
+        const USE_REDIRECT = true;
+
+        const CATS = {
+            brand: { icon: '🎨', name: '品牌視覺與影像數位', color: '#0D9488' },
+            story: { icon: '📖', name: '故事劇場與情境策畫', color: '#E05638' },
+            event: { icon: '🎪', name: '活動整合與互動體驗', color: '#7C3AED' }
+        };
+
+        // ====== 內建備援資料（試算表讀取失敗時使用）======
+        const CL = 'https://res.cloudinary.com/c05zlkva/image/upload/';
+        const WIX = 'https://luxurwind.wixsite.com/luxurwind/%E5%89%AF%E6%9C%AC-%E8%9F%BE%E8%9C%8D%E5%B1%B1-1';
+        const FALLBACK_ROWS = [
+            ['brand', '臻豪邁肉乾禮盒', '品牌識別及包裝設計', 'CIS / 包裝', CL + 'v1792724932/%E8%87%BB%E8%B1%AA%E9%82%81%E8%82%89%E4%B9%BE.jpg', ''],
+            ['brand', '臻鑽咖啡', '品牌 LOGO 及包裝設計', 'CIS / 包裝', CL + 'v1792724931/%E8%87%BB%E9%91%BD%E5%92%96%E5%95%A1LOGO.jpg', ''],
+            ['brand', '臻御行', '180萬下載量官方貼圖設計', '貼圖 IP / 商業插畫', '', ''],
+            ['brand', '張鶴曦藝人專輯', 'LOGO 及社群封面設計', '專輯視覺 / 社群', CL + 'v1792724932/chai_chung.jpg', ''],
+            ['brand', '原住民電視台-破浪三百', '節目片頭 LOGO 設計', '節目識別 / LOGO', '', ''],
+            ['brand', '老人協會', '活動舞台視覺設計', '舞台視覺 / 平面規範', '', ''],
+            ['brand', '原住民電視台', '繪本動態動畫製作', '動態製作 / 影音', '', ''],
+            ['brand', '欣桃天然氣', '網頁插畫視覺設計', '網頁視覺 / 商業插畫', CL + 'v1792724932/%E6%AC%A3%E6%A1%83%E5%A4%A9%E7%84%B6%E6%B0%A3.jpg', ''],
+            ['story', '台北市木柵動物園馬特展', '展覽插畫主視覺+手遊界面&插畫+桌遊卡牌設計', '展覽 IP / 桌遊卡牌', CL + 'v1792725418/FB4-3.jpg', WIX],
+            ['story', '台北市煥民新村', '展場主視覺插畫設計', '眷村文化 / 展覽插畫', CL + 'v1792724931/%E8%9F%BE%E8%9C%8D%E5%B1%B1%E4%B8%BB%E8%A6%96%E8%A6%BA.jpg', ''],
+            ['story', '新北市育兒寶貝袋', '繪本插畫設計', '兒童繪本 / 故事插畫', CL + 'v1792724932/%E7%B9%AA%E6%9C%AC%E5%B0%81%E9%9D%A22.jpg', ''],
+            ['story', '台北市101大樓茶包明信片', '封面插畫設計', '文化禮品 / 故事明信片', CL + 'v1792725589/taipei101.jpg', ''],
+            ['story', '海龜不哭', '插畫主視覺設計', '故事繪本 / 品牌 IP', '', ''],
+            ['event', '活動展場情境式AI互動IP營造', 'AI 技術與展場沉浸式互動', 'AI X遊戲互動', '', ''],
+            ['event', 'AI繪本故事創作營', '兒童跨域藝術教學營隊課程', '跨域教學 / AI營隊', '', ''],
+            ['event', '海龜不哭', '網頁視覺設計與海廢 DIY 創意手作體驗 (ESG)', 'ESG 永續 / 手作體驗', CL + 'v1792724932/%E6%B5%B7%E9%BE%9C%E4%B8%8D%E5%93%ADweb.jpg', ''],
+            ['event', '活動現場似顏繪', '現場藝術體驗互動與人像繪製', '現場似顏繪 / 互動體驗', CL + 'v1792724932/%E4%BC%BC%E9%A1%8F%E7%B9%AA.jpg', ''],
+            ['event', 'HERS婚禮', '客製化婚禮插畫與視覺設計', '婚禮插畫 / 專屬紀念', '', ''],
+            ['event', '台北市木柵動物園', '馬特展手遊互動體驗', '遊戲互動', '', WIX]
+        ];
+
+        function rowsToPortfolio(rows) {
+            const out = { brand: [], story: [], event: [] };
+            rows.forEach(([cat, title, desc, tag, image, link]) => {
+                if (!out[cat] || !title) return;
+                out[cat].push({ cat, title, desc: desc || '', tag: tag || '', image: image || '', link: normalizeUrl(link) });
             });
-        });
-
-        // 點擊「分享卡片」時觸發
-        async function shareFlexCard() {
-            try {
-                // 檢查是否在 LINE 內開啓或已登入
-                if (!liff.isLoggedIn()) {
-                    liff.login();
-                    return;
-                }
-
-                if (liff.isApiAvailable('shareTargetPicker')) {
-                    const singleBubbleMessage = {
-                        type: "flex",
-                        altText: "拉蒂設計 - 吳貞妮 Linno 的數位電子名片與核心服務",
-                        contents: {
-                            type: "bubble",
-                            header: {
-                                type: "box",
-                                layout: "vertical",
-                                backgroundColor: "#0D9488",
-                                contents: [
-                                    { type: "text", text: "LUXURWIND 數位名片", color: "#FFFFFF", weight: "bold", size: "sm", align: "center" }
-                                ]
-                            },
-                            hero: {
-                                type: "image",
-                                url: "https://res.cloudinary.com/c05zlkva/image/upload/v1792724482/%E5%A4%A7%E9%A0%AD%E8%B2%BC.jpg",
-                                size: "full",
-                                aspectRatio: "4:3",
-                                aspectMode: "cover"
-                            },
-                            body: {
-                                type: "box",
-                                layout: "vertical",
-                                spacing: "md",
-                                contents: [
-                                    {
-                                        type: "box",
-                                        layout: "vertical",
-                                        contents: [
-                                            { type: "text", text: "吳貞妮 Linno", weight: "bold", size: "xl" },
-                                            { type: "text", text: "拉蒂設計 創辦人 / 品牌設計師", color: "#0D9488", size: "sm", margin: "xs" },
-                                            { type: "text", text: "文創 × 故事 × 藝術 × 設計", size: "xs", color: "#888888", margin: "xs" }
-                                        ]
-                                    },
-                                    { type: "separator", margin: "md" },
-                                    {
-                                        type: "box",
-                                        layout: "vertical",
-                                        spacing: "sm",
-                                        contents: [
-                                            {
-                                                type: "button",
-                                                style: "secondary",
-                                                height: "sm",
-                                                action: {
-                                                    type: "uri",
-                                                    label: "🎨 品牌視覺與影像數位",
-                                                    uri: `${window.location.origin}${window.location.pathname}?cat=brand`
-                                                }
-                                            },
-                                            {
-                                                type: "button",
-                                                style: "secondary",
-                                                height: "sm",
-                                                action: {
-                                                    type: "uri",
-                                                    label: "📖 故事劇場與情境策畫",
-                                                    uri: `${window.location.origin}${window.location.pathname}?cat=story`
-                                                }
-                                            },
-                                            {
-                                                type: "button",
-                                                style: "secondary",
-                                                height: "sm",
-                                                action: {
-                                                    type: "uri",
-                                                    label: "🎪 活動整合與互動體驗",
-                                                    uri: `${window.location.origin}${window.location.pathname}?cat=event`
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            footer: {
-                                type: "box",
-                                layout: "horizontal",
-                                spacing: "sm",
-                                contents: [
-                                    {
-                                        type: "button",
-                                        style: "primary",
-                                        color: "#0D9488",
-                                        action: { type: "uri", label: "加 LINE", uri: "https://line.me/ti/p/~kkk112233k" }
-                                    },
-                                    {
-                                        type: "button",
-                                        style: "secondary",
-                                        action: { type: "uri", label: "分享卡片", uri: `https://liff.line.me/${LIFF_ID}` }
-                                    }
-                                ]
-                            }
-                        }
-                    };
-
-                    const result = await liff.shareTargetPicker([singleBubbleMessage]);
-                    if (result) {
-                        alert('精華卡片已成功分享至 LINE！');
-                    } else {
-                        console.log('使用者取消分享');
-                    }
-                } else {
-                    alert('目前環境不支援一鍵分享，請確認是否在 LINE 手機 App 內開啟此網頁。');
-                }
-            } catch (error) {
-                console.error(error);
-                alert('分享功能執行中，請確認已在 LINE App 內開啟網頁。');
-            }
+            return out;
         }
 
-        // 資料抓取與彈窗功能
-        let portfolioData = {
-            brand: [
-                { title: '臻豪邁肉乾禮盒', desc: '品牌識別及包裝設計', tag: 'CIS / 包裝' },
-                { title: '臻鑽咖啡', desc: '品牌 LOGO 及包裝設計', tag: 'CIS / 包裝' },
-                { title: '臻御行', desc: '180萬下載量官方貼圖設計', tag: '貼圖 IP / 商業插畫' },
-                { title: '張鶴曦藝人專輯', desc: 'LOGO 及社群封面設計', tag: '專輯視覺 / 社群' },
-                { title: '原住民電視台-破浪三百', desc: '節目片頭 LOGO 設計', tag: '節目識別 / LOGO' },
-                { title: '老人協會', desc: '活動舞台視覺設計', tag: '舞台視覺 / 平面規範' },
-                { title: '原住民電視台', desc: '繪本動態動畫製作', tag: '動態製作 / 影音' },
-                { title: '欣桃天然氣', desc: '網頁插畫視覺設計', tag: '網頁視覺 / 商業插畫' }
-            ],
-            story: [
-                { title: '台北市木柵動物園馬特展', desc: '展覽插畫主視覺+手遊界面&插畫+桌遊卡牌設計', tag: '展覽 IP / 桌遊卡牌' },
-                { title: '台北市煥民新村', desc: '展場主視覺插畫設計', tag: '眷村文化 / 展覽插畫' },
-                { title: '新北市育兒寶貝袋', desc: '繪本插畫設計', tag: '兒童繪本 / 故事插畫' },
-                { title: '台北市101大樓茶包明信片', desc: '封面插畫設計', tag: '文化禮品 / 故事明信片' },
-                { title: '海龜不哭', desc: '插畫主視覺設計', tag: '故事繪本 / 品牌 IP' }
-            ],
-            event: [
-                { title: '活動展場情境式AI互動IP營造', desc: '商業跨界合作，AI 技術與展場沉浸式互動', tag: 'AI 科技 / 展場互動' },
-                { title: 'AI繪本故事創作營', desc: '兒童跨域藝術教學營隊課程', tag: '跨域教學 / AI營隊' },
-                { title: '海龜不哭', desc: '網頁視覺設計與海廢 DIY 創意手作體驗 (ESG)', tag: 'ESG 永續 / 手作體驗' },
-                { title: '活動現場似顏繪', desc: '現場藝術體驗互動與人像繪製', tag: '現場似顏繪 / 互動體驗' },
-                { title: 'HERS婚禮', desc: '客製化婚禮插畫與視覺設計', tag: '婚禮插畫 / 專屬紀念' }
-            ]
-        };
+        function normalizeUrl(u) {
+            u = (u || '').trim();
+            if (!u) return '';
+            if (/^https?:\/\//i.test(u)) return u;
+            if (/^[\w-]+(\.[\w-]+)+/.test(u)) return 'https://' + u;
+            return '';
+        }
+
+        let portfolioData = rowsToPortfolio(FALLBACK_ROWS);
+
+        // ====== 讀取 Google 試算表 ======
+        async function fetchSheet(name) {
+            const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(name)}`;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const text = await res.text();
+            const m = text.match(/setResponse\(([\s\S]*)\);?\s*$/);
+            if (!m) throw new Error('unexpected response');
+            return JSON.parse(m[1]);
+        }
+
+        function cell(r, i) {
+            return (r.c && r.c[i] && r.c[i].v != null) ? String(r.c[i].v).trim() : '';
+        }
 
         async function loadSheetData() {
             try {
-                const resProfile = await fetch(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=Profile`);
-                if (resProfile.ok) {
-                    const text = await resProfile.text();
-                    const json = JSON.parse(text.substring(47, text.length - 2));
-                    json.table.rows.forEach(r => {
-                        const key = r.c && r.c[0] ? r.c[0].v : '';
-                        const val = r.c && r.c[1] ? r.c[1].v : '';
-                        if (key === 'name' && val) document.getElementById('profile-name').innerText = val;
-                        if (key === 'title' && val) document.getElementById('profile-title').innerText = val;
-                        if (key === 'slogan' && val) document.getElementById('profile-slogan').innerText = val;
-                        if (key === 'avatar' && val) document.getElementById('avatar').src = val;
-                        if (key === 'lineId' && val) document.getElementById('line-link').href = `https://line.me/ti/p/~${val}`;
-                    });
-                }
-            } catch (e) {}
+                const json = await fetchSheet('Profile');
+                json.table.rows.forEach(r => {
+                    const key = cell(r, 0), val = cell(r, 1);
+                    if (!val) return;
+                    if (key === 'name') document.getElementById('profile-name').innerText = val;
+                    if (key === 'title') document.getElementById('profile-title').innerText = val;
+                    if (key === 'slogan') document.getElementById('profile-slogan').innerText = val;
+                    if (key === 'avatar') document.getElementById('avatar').src = val;
+                    if (key === 'lineId') document.getElementById('line-link').href = `https://line.me/ti/p/~${val}`;
+                });
+            } catch (e) { /* 沒有 Profile 分頁就沿用預設 */ }
 
             try {
-                const resPortfolio = await fetch(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=Portfolio`);
-                if (resPortfolio.ok) {
-                    const text = await resPortfolio.text();
-                    const json = JSON.parse(text.substring(47, text.length - 2));
-                    let newPortfolio = { brand: [], story: [], event: [] };
-                    json.table.rows.forEach((r, idx) => {
-                        if (idx === 0) return;
-                        const cat = r.c && r.c[0] ? r.c[0].v.toLowerCase() : '';
-                        const title = r.c && r.c[1] ? r.c[1].v : '';
-                        const desc = r.c && r.c[2] ? r.c[2].v : '';
-                        const tag = r.c && r.c[3] ? r.c[3].v : '';
-                        if (newPortfolio[cat]) {
-                            newPortfolio[cat].push({ title, desc, tag });
-                        }
-                    });
-                    if (newPortfolio.brand.length > 0) portfolioData = newPortfolio;
-                }
-            } catch (e) {}
+                const json = await fetchSheet('Portfolio');
+                // 欄位：Category / Title / Description / Tag / Image / Link
+                // Category 不是 brand/story/event 的列（例如標題列）會自動略過
+                const rows = json.table.rows.map(r => [
+                    cell(r, 0).toLowerCase(), cell(r, 1), cell(r, 2), cell(r, 3), cell(r, 4), cell(r, 5)
+                ]);
+                const parsed = rowsToPortfolio(rows);
+                if (parsed.brand.length + parsed.story.length + parsed.event.length > 0) portfolioData = parsed;
+            } catch (e) { /* 失敗就沿用內建備援資料 */ }
         }
 
-        function openPortfolio(category) {
-            const titles = {
-                brand: '🎨 品牌視覺與影像數位',
-                story: '📖 故事劇場與情境策畫',
-                event: '🎪 活動整合與互動體驗'
-            };
+        const dataReady = loadSheetData();
 
-            document.getElementById('modal-category-title').innerText = titles[category];
-            const listContainer = document.getElementById('modal-portfolio-list');
-            listContainer.innerHTML = '';
+        // ====== LIFF（需要分享時才初始化）======
+        let liffPromise = null;
+        function ensureLiff() {
+            if (!liffPromise) {
+                if (typeof liff === 'undefined') return Promise.reject(new Error('LIFF SDK 未載入'));
+                liffPromise = liff.init({ liffId: LIFF_ID });
+            }
+            return liffPromise;
+        }
 
-            const items = portfolioData[category] || [];
-            items.forEach(item => {
-                const el = document.createElement('div');
-                el.className = 'portfolio-item';
-                el.innerHTML = `
-                    <div class="portfolio-item-title">${item.title}</div>
-                    <div class="portfolio-item-desc">${item.desc}</div>
-                    <span class="portfolio-tag"># ${item.tag}</span>
-                `;
-                listContainer.appendChild(el);
+        // ====== LINE Flex 卡片（單一 bubble）======
+        function clip(s, n) { s = String(s || ''); return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+
+        function caseUri(item) {
+            if (!USE_REDIRECT && item.link) return item.link;
+            return `${SITE_URL}?go=${encodeURIComponent(item.cat + '|' + item.title)}`;
+        }
+
+        function buildFlex() {
+            const name = document.getElementById('profile-name').innerText;
+            const title = document.getElementById('profile-title').innerText;
+            const slogan = document.getElementById('profile-slogan').innerText;
+            const avatar = document.getElementById('avatar').src;
+            const lineHref = document.getElementById('line-link').href;
+
+            const body = [
+                {
+                    type: 'box', layout: 'vertical', spacing: 'xs',
+                    contents: [
+                        { type: 'text', text: name, weight: 'bold', size: 'xl', wrap: true },
+                        { type: 'text', text: title, color: '#0D9488', size: 'sm', wrap: true },
+                        { type: 'text', text: slogan, size: 'xs', color: '#888888', wrap: true }
+                    ]
+                },
+                { type: 'separator', margin: 'lg' },
+                { type: 'text', text: '點選案例即可查看作品', size: 'xs', color: '#9CA3AF', margin: 'md' }
+            ];
+
+            Object.keys(CATS).forEach(cat => {
+                const items = portfolioData[cat] || [];
+                if (!items.length) return;
+                const meta = CATS[cat];
+                body.push({
+                    type: 'text', text: `${meta.icon} ${meta.name}`,
+                    weight: 'bold', size: 'sm', color: meta.color, margin: 'xl', wrap: true
+                });
+                items.forEach(item => {
+                    body.push({
+                        type: 'box', layout: 'horizontal', margin: 'sm',
+                        paddingAll: 'md', cornerRadius: 'md', backgroundColor: '#F3F4F6',
+                        action: { type: 'uri', label: clip(item.title, 20), uri: caseUri(item) },
+                        contents: [
+                            {
+                                type: 'box', layout: 'vertical', flex: 1, spacing: 'xs',
+                                contents: [
+                                    { type: 'text', text: item.title, size: 'sm', weight: 'bold', wrap: true, color: '#1F2937' },
+                                    { type: 'text', text: item.tag || item.desc || ' ', size: 'xxs', color: '#6B7280', wrap: true }
+                                ]
+                            },
+                            { type: 'text', text: '›', size: 'xl', color: meta.color, flex: 0, align: 'end', gravity: 'center' }
+                        ]
+                    });
+                });
             });
 
+            return {
+                type: 'flex',
+                altText: clip(`${name}｜拉蒂設計 數位名片與作品案例`, 100),
+                contents: {
+                    type: 'bubble',
+                    size: 'giga',
+                    header: {
+                        type: 'box', layout: 'vertical', backgroundColor: '#0D9488',
+                        contents: [{ type: 'text', text: 'LUXURWIND 數位名片', color: '#FFFFFF', weight: 'bold', size: 'sm', align: 'center' }]
+                    },
+                    hero: { type: 'image', url: avatar, size: 'full', aspectRatio: '4:3', aspectMode: 'cover' },
+                    body: { type: 'box', layout: 'vertical', contents: body },
+                    footer: {
+                        type: 'box', layout: 'horizontal', spacing: 'sm',
+                        contents: [
+                            { type: 'button', style: 'primary', color: '#06C755', height: 'sm', action: { type: 'uri', label: '加 LINE', uri: lineHref } },
+                            { type: 'button', style: 'secondary', height: 'sm', action: { type: 'uri', label: '完整名片', uri: SITE_URL } }
+                        ]
+                    }
+                }
+            };
+        }
+
+        async function shareFlexCard() {
+            try {
+                await dataReady;
+                await ensureLiff();
+
+                if (!liff.isLoggedIn()) {
+                    liff.login({ redirectUri: SITE_URL });
+                    return;
+                }
+                if (!liff.isApiAvailable('shareTargetPicker')) {
+                    alert('目前環境不支援分享，請在 LINE App 內開啟，並確認 LIFF 已開啟 Share target picker。');
+                    return;
+                }
+                const result = await liff.shareTargetPicker([buildFlex()]);
+                if (result && result.status === 'success') alert('名片已分享至 LINE！');
+            } catch (error) {
+                console.error(error);
+                alert('分享失敗：' + (error && error.message ? error.message : error));
+            }
+        }
+
+        // ====== 作品集彈窗 ======
+        function renderItem(item, withThumb) {
+            const el = document.createElement(item.link ? 'a' : 'div');
+            el.className = 'portfolio-item';
+            if (item.link) { el.href = item.link; el.target = '_blank'; el.rel = 'noopener'; }
+
+            if (item.image && withThumb !== false) {
+                const img = document.createElement('img');
+                img.className = 'portfolio-thumb';
+                img.src = item.image;
+                img.alt = item.title;
+                img.loading = 'lazy';
+                img.onerror = () => img.remove();
+                el.appendChild(img);
+            }
+            const t = document.createElement('div');
+            t.className = 'portfolio-item-title';
+            t.textContent = item.title;
+            el.appendChild(t);
+
+            if (item.desc) {
+                const d = document.createElement('div');
+                d.className = 'portfolio-item-desc';
+                d.textContent = item.desc;
+                el.appendChild(d);
+            }
+            if (item.tag) {
+                const g = document.createElement('span');
+                g.className = 'portfolio-tag';
+                g.textContent = '# ' + item.tag;
+                el.appendChild(g);
+            }
+            if (item.link) {
+                const go = document.createElement('span');
+                go.className = 'portfolio-go';
+                go.textContent = '查看作品 ›';
+                el.appendChild(go);
+            }
+            return el;
+        }
+
+        async function openPortfolio(category) {
+            await dataReady;
+            const meta = CATS[category];
+            if (!meta) return;
+            document.getElementById('modal-category-title').innerText = `${meta.icon} ${meta.name}`;
+            const list = document.getElementById('modal-portfolio-list');
+            list.innerHTML = '';
+            (portfolioData[category] || []).forEach(item => list.appendChild(renderItem(item)));
             document.getElementById('portfolio-modal').classList.add('active');
         }
 
         function closePortfolio() {
             document.getElementById('portfolio-modal').classList.remove('active');
         }
+
+        // ====== 從 LINE 卡片的案例按鈕進來（?go=分類|案例名稱）======
+        async function handleGo(key) {
+            document.body.classList.add('go-mode');
+            const box = document.getElementById('go-screen');
+            box.innerHTML = '<div class="go-card"><div class="go-status">正在前往作品…</div></div>';
+
+            await dataReady;
+            const sep = key.indexOf('|');
+            const cat = key.slice(0, sep);
+            const title = key.slice(sep + 1);
+            const item = (portfolioData[cat] || []).find(i => i.title === title);
+
+            const card = document.createElement('div');
+            card.className = 'go-card';
+            const status = document.createElement('div');
+            status.className = 'go-status';
+            card.appendChild(status);
+
+            if (item) card.appendChild(renderItem(item));
+            const actions = document.createElement('div');
+            actions.className = 'go-actions';
+            const home = document.createElement('a');
+            home.className = 'btn-action';
+            home.href = SITE_URL;
+            home.textContent = '查看完整名片';
+            actions.appendChild(home);
+            card.appendChild(actions);
+
+            box.innerHTML = '';
+            box.appendChild(card);
+
+            if (item && item.link) {
+                status.textContent = '正在前往作品…（若沒有自動開啟，請點下方卡片）';
+                location.replace(item.link);
+            } else if (item) {
+                status.textContent = '這個案例的作品連結更新中，敬請期待';
+            } else {
+                status.textContent = '找不到這個案例，請回到完整名片查看';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const go = params.get('go');
+            if (go && go.indexOf('|') > 0) { handleGo(go); return; }
+
+            const cat = params.get('cat');
+            if (cat && CATS[cat]) setTimeout(() => openPortfolio(cat), 300);
+        });
     </script>
 </body>
 </html>
