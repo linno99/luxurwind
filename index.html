@@ -532,3 +532,101 @@
         }
 
         // 資料抓取與彈窗功能維持不變
+        let portfolioData = {
+            brand: [
+                { title: '臻豪邁肉乾禮盒', desc: '品牌識別及包裝設計', tag: 'CIS / 包裝' },
+                { title: '臻鑽咖啡', desc: '品牌 LOGO 及包裝設計', tag: 'CIS / 包裝' },
+                { title: '臻御行', desc: '180萬下載量官方貼圖設計', tag: '貼圖 IP / 商業插畫' },
+                { title: '張鶴曦藝人專輯', desc: 'LOGO 及社群封面設計', tag: '專輯視覺 / 社群' },
+                { title: '原住民電視台-破浪三百', desc: '節目片頭 LOGO 設計', tag: '節目識別 / LOGO' },
+                { title: '老人協會', desc: '活動舞台視覺設計', tag: '舞台視覺 / 平面規範' },
+                { title: '原住民電視台', desc: '繪本動態動畫製作', tag: '動態製作 / 影音' },
+                { title: '欣桃天然氣', desc: '網頁插畫視覺設計', tag: '網頁視覺 / 商業插畫' }
+            ],
+            story: [
+                { title: '台北市木柵動物園馬特展', desc: '展覽插畫主視覺+手遊界面&插畫+桌遊卡牌設計', tag: '展覽 IP / 桌遊卡牌' },
+                { title: '台北市煥民新村', desc: '展場主視覺插畫設計', tag: '眷村文化 / 展覽插畫' },
+                { title: '新北市育兒寶貝袋', desc: '繪本插畫設計', tag: '兒童繪本 / 故事插畫' },
+                { title: '台北市101大樓茶包明信片', desc: '封面插畫設計', tag: '文化禮品 / 故事明信片' },
+                { title: '海龜不哭', desc: '插畫主視覺設計', tag: '故事繪本 / 品牌 IP' }
+            ],
+            event: [
+                { title: '活動展場情境式AI互動IP營造', desc: '商業跨界合作，AI 技術與展場沉浸式互動', tag: 'AI 科技 / 展場互動' },
+                { title: 'AI繪本故事創作營', desc: '兒童跨域藝術教學營隊課程', tag: '跨域教學 / AI營隊' },
+                { title: '海龜不哭', desc: '網頁視覺設計與海廢 DIY 創意手作體驗 (ESG)', tag: 'ESG 永續 / 手作體驗' },
+                { title: '活動現場似顏繪', desc: '現場藝術體驗互動與人像繪製', tag: '現場似顏繪 / 互動體驗' },
+                { title: 'HERS婚禮', desc: '客製化婚禮插畫與視覺設計', tag: '婚禮插畫 / 專屬紀念' }
+            ]
+        };
+
+        async function loadSheetData() {
+            try {
+                const resProfile = await fetch(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=Profile`);
+                if (resProfile.ok) {
+                    const text = await resProfile.text();
+                    const json = JSON.parse(text.substring(47, text.length - 2));
+                    json.table.rows.forEach(r => {
+                        const key = r.c && r.c[0] ? r.c[0].v : '';
+                        const val = r.c && r.c[1] ? r.c[1].v : '';
+                        if (key === 'name' && val) document.getElementById('profile-name').innerText = val;
+                        if (key === 'title' && val) document.getElementById('profile-title').innerText = val;
+                        if (key === 'slogan' && val) document.getElementById('profile-slogan').innerText = val;
+                        if (key === 'avatar' && val) document.getElementById('avatar').src = val;
+                        if (key === 'lineId' && val) document.getElementById('line-link').href = `https://line.me/ti/p/~${val}`;
+                    });
+                }
+            } catch (e) {}
+
+            try {
+                const resPortfolio = await fetch(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=Portfolio`);
+                if (resPortfolio.ok) {
+                    const text = await resPortfolio.text();
+                    const json = JSON.parse(text.substring(47, text.length - 2));
+                    let newPortfolio = { brand: [], story: [], event: [] };
+                    json.table.rows.forEach((r, idx) => {
+                        if (idx === 0) return;
+                        const cat = r.c && r.c[0] ? r.c[0].v.toLowerCase() : '';
+                        const title = r.c && r.c[1] ? r.c[1].v : '';
+                        const desc = r.c && r.c[2] ? r.c[2].v : '';
+                        const tag = r.c && r.c[3] ? r.c[3].v : '';
+                        if (newPortfolio[cat]) {
+                            newPortfolio[cat].push({ title, desc, tag });
+                        }
+                    });
+                    if (newPortfolio.brand.length > 0) portfolioData = newPortfolio;
+                }
+            } catch (e) {}
+        }
+
+        function openPortfolio(category) {
+            const titles = {
+                brand: '🎨 品牌視覺與影像數位',
+                story: '📖 故事劇場與情境策畫',
+                event: '🎪 活動整合與互動體驗'
+            };
+
+            document.getElementById('modal-category-title').innerText = titles[category];
+            const listContainer = document.getElementById('modal-portfolio-list');
+            listContainer.innerHTML = '';
+
+            const items = portfolioData[category] || [];
+            items.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'portfolio-item';
+                el.innerHTML = `
+                    <div class="portfolio-item-title">${item.title}</div>
+                    <div class="portfolio-item-desc">${item.desc}</div>
+                    <span class="portfolio-tag"># ${item.tag}</span>
+                `;
+                listContainer.appendChild(el);
+            });
+
+            document.getElementById('portfolio-modal').classList.add('active');
+        }
+
+        function closePortfolio() {
+            document.getElementById('portfolio-modal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
