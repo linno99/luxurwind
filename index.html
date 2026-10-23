@@ -16,18 +16,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
     
+    <!-- LINE LIFF SDK -->
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
     <style>
-        /* --------------------------------------------------
-         * 1. 品牌專屬配色與全域變數 (Teal-to-Coral Gradient)
-         * -------------------------------------------------- */
         :root {
-            --brand-teal: #1FB7A6;        /* 蒂芬妮湖水綠 */
-            --brand-teal-dark: #0D9488;   /* 深湖水綠 */
-            --brand-coral: #FE7A51;       /* 夕陽珊瑚橘 */
-            --brand-coral-dark: #E05638;  /* 深珊瑚橘 */
+            --brand-teal: #1FB7A6;
+            --brand-teal-dark: #0D9488;
+            --brand-coral: #FE7A51;
+            --brand-coral-dark: #E05638;
             --bg-gradient: linear-gradient(135deg, #1FB7A6 0%, #FE7A51 100%);
-            --text-main: #1F2937;         /* 深灰色內文 */
-            --text-sub: #6B7280;          /* 次要灰色文字 */
+            --text-main: #1F2937;
+            --text-sub: #6B7280;
             --glass-bg: rgba(255, 255, 255, 0.92);
             --glass-border: rgba(255, 255, 255, 0.8);
             --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
@@ -57,7 +57,6 @@
             background-attachment: fixed;
         }
 
-        /* 容器限制 (手機介面最佳化) */
         .card-container {
             width: 100%;
             max-width: 440px;
@@ -72,7 +71,6 @@
             overflow: hidden;
         }
 
-        /* 頁眉品牌條 */
         .brand-bar {
             text-align: center;
             margin-bottom: 20px;
@@ -92,7 +90,6 @@
             letter-spacing: 1px;
         }
 
-        /* 個人 Profile 區塊 */
         .profile-header {
             text-align: center;
             margin-bottom: 24px;
@@ -140,7 +137,6 @@
             font-weight: 500;
         }
 
-        /* 分割線 */
         .section-divider {
             display: flex;
             align-items: center;
@@ -160,7 +156,6 @@
             padding: 0 12px;
         }
 
-        /* 三大領域卡片列表 */
         .service-card {
             background: #FFF;
             border-radius: var(--radius-md);
@@ -201,7 +196,6 @@
             line-height: 1.4;
         }
 
-        /* 快捷按鈕區 (加 LINE & 分享名片) */
         .action-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -242,7 +236,6 @@
         }
         .btn-action:active { transform: scale(0.96); }
 
-        /* 全螢幕/彈窗 Portfolio Modal */
         .modal {
             display: none;
             position: fixed;
@@ -295,7 +288,6 @@
             font-size: 1rem;
         }
 
-        /* 案例清單項目 */
         .portfolio-item {
             padding: 14px;
             background: #F9FAFB;
@@ -325,7 +317,6 @@
             font-weight: 600;
         }
 
-        /* 頁尾 */
         .footer-text {
             text-align: center;
             font-size: 0.75rem;
@@ -337,13 +328,11 @@
 <body>
 
     <div class="card-container">
-        <!-- 品牌標頭 -->
         <div class="brand-bar">
             <div class="brand-logo-text">LUXURWIND</div>
             <div class="brand-sub">拉蒂設計</div>
         </div>
 
-        <!-- 個人資訊 (預設內容與試算表同步) -->
         <div class="profile-header">
             <div class="avatar-wrapper">
                 <div class="avatar-ring"></div>
@@ -354,12 +343,10 @@
             <div id="profile-slogan" class="profile-slogan">文創 × 故事 × 藝術 × 設計</div>
         </div>
 
-        <!-- 分割線：服務與案例 -->
         <div class="section-divider">
             <span>三大核心服務與作品集</span>
         </div>
 
-        <!-- 三大領域按鈕卡片 -->
         <div class="service-card" onclick="openPortfolio('brand')">
             <div class="service-card-header">
                 <span class="service-title"><i class="fa-solid fa-palette"></i> 品牌視覺與影像數位</span>
@@ -381,15 +368,15 @@
             <div class="service-desc">展場 AI 互動 IP / 跨域營隊 / ESG 體驗課程 / 似顏繪</div>
         </div>
 
-        <!-- 快捷動作按鈕 -->
+        <!-- 快捷動作按鈕：加 LINE & 一鍵分享精美卡片至 LINE -->
         <div class="action-grid">
             <a id="line-link" href="https://line.me/ti/p/~kkk112233k" target="_blank" class="btn-action line">
                 <i class="fa-brands fa-line"></i>
                 加 LINE
             </a>
-            <button onclick="shareCard()" class="btn-action share">
+            <button onclick="shareFlexCard()" class="btn-action share">
                 <i class="fa-solid fa-share-nodes"></i>
-                分享名片
+                分享卡片
             </button>
         </div>
 
@@ -405,16 +392,131 @@
                 <div id="modal-category-title" class="modal-title">案例展示</div>
                 <button class="btn-close" onclick="closePortfolio()"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div id="modal-portfolio-list">
-                <!-- 動態注入案例清單 -->
-            </div>
+            <div id="modal-portfolio-list"></div>
         </div>
     </div>
 
     <script>
         const GOOGLE_SHEET_ID = '1g7_HsReMbti7OlpdnoMkUfrNd6G4TsyBReo9PW9SO-8';
+        const LIFF_ID = '2012168875-2P11bla1'; // 已更新您的 LINE LIFF ID
 
-        // 預設完整的 18 個案例，確保畫面不卡住白屏
+        // 初始化 LIFF
+        window.addEventListener('DOMContentLoaded', () => {
+            if (LIFF_ID) {
+                liff.init({ liffId: LIFF_ID }).catch(err => console.log('LIFF 初始化失敗', err));
+            }
+            loadSheetData();
+        });
+
+        // 一鍵分享 Flex Message 卡片至 LINE 聊天室
+        async function shareFlexCard() {
+            if (!liff.isLoggedIn()) {
+                liff.login();
+                return;
+            }
+            if (liff.isApiAvailable('shareTargetPicker')) {
+                try {
+                    const flexMessage = {
+                        type: "flex",
+                        altText: "拉蒂設計 - 吳貞妮 Linno 的數位電子名片",
+                        contents: {
+                            type: "bubble",
+                            header: {
+                                type: "box",
+                                layout: "vertical",
+                                backgroundColor: "#0D9488",
+                                contents: [
+                                    {
+                                        type: "text",
+                                        text: "LUXURWIND",
+                                        color: "#FFFFFF",
+                                        weight: "bold",
+                                        size: "sm",
+                                        align: "center"
+                                    }
+                                ]
+                            },
+                            hero: {
+                                type: "image",
+                                url: "https://res.cloudinary.com/c05zlkva/image/upload/v1792724482/%E5%A4%A7%E9%A0%AD%E8%B2%BC.jpg",
+                                size: "full",
+                                aspectRatio: "4:3",
+                                aspectMode: "cover"
+                            },
+                            body: {
+                                type: "box",
+                                layout: "vertical",
+                                contents: [
+                                    {
+                                        type: "text",
+                                        text: "吳貞妮 Linno",
+                                        weight: "bold",
+                                        size: "xl"
+                                    },
+                                    {
+                                        type: "text",
+                                        text: "拉蒂設計 創辦人 / 品牌設計師",
+                                        color: "#0D9488",
+                                        size: "sm",
+                                        margin: "sm"
+                                    },
+                                    {
+                                        type: "separator",
+                                        margin: "md"
+                                    },
+                                    {
+                                        type: "text",
+                                        text: "文創 × 故事 × 藝術 × 設計",
+                                        size: "xs",
+                                        color: "#888888",
+                                        margin: "md"
+                                    }
+                                ]
+                            },
+                            footer: {
+                                type: "box",
+                                layout: "horizontal",
+                                spacing: "sm",
+                                contents: [
+                                    {
+                                        type: "button",
+                                        style: "primary",
+                                        color: "#0D9488",
+                                        action: {
+                                            type: "uri",
+                                            label: "加 LINE",
+                                            uri: "https://line.me/ti/p/~kkk112233k"
+                                        }
+                                    },
+                                    {
+                                        type: "button",
+                                        style: "secondary",
+                                        action: {
+                                            type: "uri",
+                                            label: "查看名片",
+                                            uri: window.location.href
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    };
+
+                    const result = await liff.shareTargetPicker([flexMessage]);
+                    if (result) {
+                        alert('卡片已成功分享至 LINE！');
+                    } else {
+                        console.log('使用者取消分享');
+                    }
+                } catch (error) {
+                    alert('分享失敗，請確認在 LINE 應用程式內開啟。');
+                }
+            } else {
+                alert('此瀏覽器不支援一鍵分享功能，請在 LINE 應用程式內開啟。');
+            }
+        }
+
+        // 預設/備用資料與 Google Sheet 串接
         let portfolioData = {
             brand: [
                 { title: '臻豪邁肉乾禮盒', desc: '品牌識別及包裝設計', tag: 'CIS / 包裝' },
@@ -442,7 +544,6 @@
             ]
         };
 
-        // 嘗試從 Google Sheet 抓取最新資料（非同步背景更新）
         async function loadSheetData() {
             try {
                 const resProfile = await fetch(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=Profile`);
@@ -459,9 +560,7 @@
                         if (key === 'lineId' && val) document.getElementById('line-link').href = `https://line.me/ti/p/~${val}`;
                     });
                 }
-            } catch (e) {
-                console.log('Profile 自動切換預設資料');
-            }
+            } catch (e) {}
 
             try {
                 const resPortfolio = await fetch(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=Portfolio`);
@@ -481,14 +580,8 @@
                     });
                     if (newPortfolio.brand.length > 0) portfolioData = newPortfolio;
                 }
-            } catch (e) {
-                console.log('Portfolio 自動切換預設資料');
-            }
+            } catch (e) {}
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            loadSheetData();
-        });
 
         function openPortfolio(category) {
             const titles = {
@@ -518,19 +611,6 @@
 
         function closePortfolio() {
             document.getElementById('portfolio-modal').classList.remove('active');
-        }
-
-        function shareCard() {
-            if (navigator.share) {
-                navigator.share({
-                    title: '吳貞妮 Linno | 拉蒂設計',
-                    text: '這是拉蒂設計創辦人 吳貞妮 Linno 的個人數位電子名片',
-                    url: window.location.href
-                });
-            } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert('已複製名片網址至剪貼簿！');
-            }
         }
     </script>
 </body>
