@@ -368,7 +368,7 @@
             <div class="service-desc">展場 AI 互動 IP / 跨域營隊 / ESG 體驗課程 / 似顏繪</div>
         </div>
 
-        <!-- 快捷動作按鈕：加 LINE & 一鍵分享精美卡片至 LINE -->
+        <!-- 快捷動作按鈕 -->
         <div class="action-grid">
             <a id="line-link" href="https://line.me/ti/p/~kkk112233k" target="_blank" class="btn-action line">
                 <i class="fa-brands fa-line"></i>
@@ -398,9 +398,8 @@
 
     <script>
         const GOOGLE_SHEET_ID = '1g7_HsReMbti7OlpdnoMkUfrNd6G4TsyBReo9PW9SO-8';
-        const LIFF_ID = '2012168875-2P11bla1'; // 已更新您的 LINE LIFF ID
+        const LIFF_ID = '2012168875-2P11bla1';
 
-        // 初始化 LIFF
         window.addEventListener('DOMContentLoaded', () => {
             if (LIFF_ID) {
                 liff.init({ liffId: LIFF_ID }).catch(err => console.log('LIFF 初始化失敗', err));
@@ -408,7 +407,7 @@
             loadSheetData();
         });
 
-        // 一鍵分享 Flex Message 卡片至 LINE 聊天室
+        // 分享單頁精華卡片 (Single Bubble Flex Message) 至 LINE 聊天室
         async function shareFlexCard() {
             if (!liff.isLoggedIn()) {
                 liff.login();
@@ -416,9 +415,9 @@
             }
             if (liff.isApiAvailable('shareTargetPicker')) {
                 try {
-                    const flexMessage = {
+                    const singleBubbleMessage = {
                         type: "flex",
-                        altText: "拉蒂設計 - 吳貞妮 Linno 的數位電子名片",
+                        altText: "拉蒂設計 - 吳貞妮 Linno 的數位電子名片與核心服務",
                         contents: {
                             type: "bubble",
                             header: {
@@ -426,14 +425,7 @@
                                 layout: "vertical",
                                 backgroundColor: "#0D9488",
                                 contents: [
-                                    {
-                                        type: "text",
-                                        text: "LUXURWIND",
-                                        color: "#FFFFFF",
-                                        weight: "bold",
-                                        size: "sm",
-                                        align: "center"
-                                    }
+                                    { type: "text", text: "LUXURWIND 數位名片", color: "#FFFFFF", weight: "bold", size: "sm", align: "center" }
                                 ]
                             },
                             hero: {
@@ -446,30 +438,27 @@
                             body: {
                                 type: "box",
                                 layout: "vertical",
+                                spacing: "md",
                                 contents: [
                                     {
-                                        type: "text",
-                                        text: "吳貞妮 Linno",
-                                        weight: "bold",
-                                        size: "xl"
+                                        type: "box",
+                                        layout: "vertical",
+                                        contents: [
+                                            { type: "text", text: "吳貞妮 Linno", weight: "bold", size: "xl" },
+                                            { type: "text", text: "拉蒂設計 創辦人 / 品牌設計師", color: "#0D9488", size: "sm", margin: "xs" },
+                                            { type: "text", text: "文創 × 故事 × 藝術 × 設計", size: "xs", color: "#888888", margin: "xs" }
+                                        ]
                                     },
+                                    { type: "separator", margin: "md" },
                                     {
-                                        type: "text",
-                                        text: "拉蒂設計 創辦人 / 品牌設計師",
-                                        color: "#0D9488",
-                                        size: "sm",
-                                        margin: "sm"
-                                    },
-                                    {
-                                        type: "separator",
-                                        margin: "md"
-                                    },
-                                    {
-                                        type: "text",
-                                        text: "文創 × 故事 × 藝術 × 設計",
-                                        size: "xs",
-                                        color: "#888888",
-                                        margin: "md"
+                                        type: "box",
+                                        layout: "vertical",
+                                        spacing: "sm",
+                                        contents: [
+                                            { type: "text", text: "🎨 品牌視覺：肉乾禮盒、咖啡包裝、貼圖IP", size: "xs", color: "#333333", wrap: true },
+                                            { type: "text", text: "📖 故事策畫：動物園特展、文化繪本、IP", size: "xs", color: "#333333", wrap: true },
+                                            { type: "text", text: "🎪 活動體驗：AI互動營、ESG手作、似顏繪", size: "xs", color: "#333333", wrap: true }
+                                        ]
                                     }
                                 ]
                             },
@@ -482,29 +471,21 @@
                                         type: "button",
                                         style: "primary",
                                         color: "#0D9488",
-                                        action: {
-                                            type: "uri",
-                                            label: "加 LINE",
-                                            uri: "https://line.me/ti/p/~kkk112233k"
-                                        }
+                                        action: { type: "uri", label: "加 LINE", uri: "https://line.me/ti/p/~kkk112233k" }
                                     },
                                     {
                                         type: "button",
                                         style: "secondary",
-                                        action: {
-                                            type: "uri",
-                                            label: "查看名片",
-                                            uri: window.location.href
-                                        }
+                                        action: { type: "uri", label: "查看完整網站", uri: window.location.href }
                                     }
                                 ]
                             }
                         }
                     };
 
-                    const result = await liff.shareTargetPicker([flexMessage]);
+                    const result = await liff.shareTargetPicker([singleBubbleMessage]);
                     if (result) {
-                        alert('卡片已成功分享至 LINE！');
+                        alert('精華卡片已成功分享至 LINE！');
                     } else {
                         console.log('使用者取消分享');
                     }
@@ -516,7 +497,7 @@
             }
         }
 
-        // 預設/備用資料與 Google Sheet 串接
+        // 資料抓取與彈窗功能維持不變
         let portfolioData = {
             brand: [
                 { title: '臻豪邁肉乾禮盒', desc: '品牌識別及包裝設計', tag: 'CIS / 包裝' },
