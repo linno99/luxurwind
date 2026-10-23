@@ -349,6 +349,7 @@
         </div>
 
         <div class="footer-text">© 2026 Luxurwind. All rights reserved.</div>
+        <div id="build-info" class="footer-text" style="margin-top:4px">v2.1 · 資料載入中…</div>
     </div>
 
     <!-- 從 LINE 卡片點案例按鈕進來時顯示 -->
@@ -428,7 +429,7 @@
 
         // ====== 讀取 Google 試算表 ======
         async function fetchSheet(name) {
-            const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(name)}`;
+            const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(name)}&_=${Date.now()}`;
             const res = await fetch(url);
             if (!res.ok) throw new Error('HTTP ' + res.status);
             const text = await res.text();
@@ -463,11 +464,22 @@
                     cell(r, 0).toLowerCase(), cell(r, 1), cell(r, 2), cell(r, 3), cell(r, 4), cell(r, 5)
                 ]);
                 const parsed = rowsToPortfolio(rows);
-                if (parsed.brand.length + parsed.story.length + parsed.event.length > 0) portfolioData = parsed;
-            } catch (e) { /* 失敗就沿用內建備援資料 */ }
+                if (parsed.brand.length + parsed.story.length + parsed.event.length > 0) {
+                    portfolioData = parsed;
+                    dataSource = 'sheet';
+                }
+            } catch (e) {
+                // 失敗就沿用內建備援資料
+                console.warn('讀取試算表失敗，改用內建備援資料：', e);
+            }
         }
 
-        const dataReady = loadSheetData();
+        const BUILD = 'v2.1';
+        let dataSource = 'fallback';
+        const dataReady = loadSheetData().then(() => {
+            const el = document.getElementById('build-info');
+            if (el) el.textContent = `${BUILD} · 資料：` + (dataSource === 'sheet' ? '試算表（最新）' : '內建備援（試算表讀取失敗）');
+        });
 
         // ====== LIFF（需要分享時才初始化）======
         let liffPromise = null;
