@@ -368,7 +368,7 @@
             <div class="service-desc">展場 AI 互動 IP / 跨域營隊 / ESG 體驗課程 / 似顏繪</div>
         </div>
 
-        <!-- 網頁上的底部按鈕 -->
+        <!-- 網頁底部按鈕 -->
         <div class="action-grid">
             <a id="line-link" href="https://line.me/ti/p/~kkk112233k" target="_blank" class="btn-action line">
                 <i class="fa-brands fa-line"></i>
@@ -400,12 +400,14 @@
         const GOOGLE_SHEET_ID = '1g7_HsReMbti7OlpdnoMkUfrNd6G4TsyBReo9PW9SO-8';
         const LIFF_ID = '2012168875-2P11bla1';
 
+        // 初始化 LIFF
         window.addEventListener('DOMContentLoaded', () => {
             if (LIFF_ID) {
-                liff.init({ liffId: LIFF_ID }).catch(err => console.log('LIFF 初始化失敗', err));
+                liff.init({ liffId: LIFF_ID })
+                    .then(() => { console.log('LIFF 初始化成功'); })
+                    .catch(err => { console.log('LIFF 初始化失敗', err); });
             }
             loadSheetData().then(() => {
-                // 自動偵測網址參數，若有 ?cat= 則自動彈出對應案例視窗
                 const urlParams = new URLSearchParams(window.location.search);
                 const cat = urlParams.get('cat');
                 if (cat && ['brand', 'story', 'event'].includes(cat)) {
@@ -414,14 +416,16 @@
             });
         });
 
-        // 點擊網頁上的「分享卡片」按鈕時觸發的 Flex Message 產生與轉發
+        // 點擊「分享卡片」時觸發
         async function shareFlexCard() {
-            if (!liff.isLoggedIn()) {
-                liff.login();
-                return;
-            }
-            if (liff.isApiAvailable('shareTargetPicker')) {
-                try {
+            try {
+                // 檢查是否在 LINE 內開啓或已登入
+                if (!liff.isLoggedIn()) {
+                    liff.login();
+                    return;
+                }
+
+                if (liff.isApiAvailable('shareTargetPicker')) {
                     const singleBubbleMessage = {
                         type: "flex",
                         altText: "拉蒂設計 - 吳貞妮 Linno 的數位電子名片與核心服務",
@@ -523,15 +527,16 @@
                     } else {
                         console.log('使用者取消分享');
                     }
-                } catch (error) {
-                    alert('分享失敗，請確認在 LINE 應用程式內開啟。');
+                } else {
+                    alert('目前環境不支援一鍵分享，請確認是否在 LINE 手機 App 內開啟此網頁。');
                 }
-            } else {
-                alert('此瀏覽器不支援一鍵分享功能，請在 LINE 應用程式內開啟。');
+            } catch (error) {
+                console.error(error);
+                alert('分享功能執行中，請確認已在 LINE App 內開啟網頁。');
             }
         }
 
-        // 資料抓取與彈窗功能維持不變
+        // 資料抓取與彈窗功能
         let portfolioData = {
             brand: [
                 { title: '臻豪邁肉乾禮盒', desc: '品牌識別及包裝設計', tag: 'CIS / 包裝' },
