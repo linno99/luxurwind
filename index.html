@@ -10,7 +10,7 @@
     <meta property="og:title" content="吳貞妮 Linno | 拉蒂設計 Luxurwind">
     <meta property="og:description" content="文創 × 故事 × 藝術 × 設計｜品牌視覺與影像數位・故事劇場與情境策畫・活動整合與互動體驗">
     <meta property="og:image" content="https://res.cloudinary.com/c05zlkva/image/upload/v1792724482/%E5%A4%A7%E9%A0%AD%E8%B2%BC.jpg">
-    <meta property="og:url" content="https://linno99.github.io/Luxurwind/">
+    <meta property="og:url" content="https://linno99.github.io/luxurwind/">
 
     <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,9 +28,9 @@
             --bg-gradient: linear-gradient(135deg, #1FB7A6 0%, #FE7A51 100%);
             --text-main: #1F2937;         /* 深灰色內文 */
             --text-sub: #6B7280;          /* 次要灰色文字 */
-            --glass-bg: rgba(255, 255, 255, 0.88);
-            --glass-border: rgba(255, 255, 255, 0.6);
-            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.92);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
             --radius-lg: 20px;
             --radius-md: 14px;
         }
@@ -52,8 +52,8 @@
             padding: 20px 12px;
             color: var(--text-main);
             background-image: 
-                radial-gradient(at 0% 0%, rgba(31, 183, 166, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(254, 122, 81, 0.15) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(31, 183, 166, 0.2) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(254, 122, 81, 0.2) 0px, transparent 50%);
             background-attachment: fixed;
         }
 
@@ -171,4 +171,98 @@
             transition: all 0.25s ease;
             position: relative;
             overflow: hidden;
-            box-
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .service-card:hover, .service-card:active {
+            transform: translateY(-2px);
+            border-color: var(--brand-teal);
+            box-shadow: 0 8px 20px rgba(31, 183, 166, 0.15);
+        }
+        .service-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        .service-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .service-title i {
+            color: var(--brand-coral);
+        }
+        .service-desc {
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        /* 快捷按鈕區 (加 LINE & 分享名片) */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        .btn-action {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 12px;
+            border-radius: var(--radius-md);
+            background: #FFF;
+            border: 1px solid #E5E7EB;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .btn-action i {
+            font-size: 1.2rem;
+        }
+        .btn-action.line { 
+            color: #FFF; 
+            background: #06C755; 
+            border-color: #06C755;
+        }
+        .btn-action.share { 
+            color: var(--brand-coral); 
+            border-color: rgba(254, 122, 81, 0.3);
+            background: rgba(254, 122, 81, 0.05);
+        }
+        .btn-action:active { transform: scale(0.96); }
+
+        /* 全螢幕/彈窗 Portfolio Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            width: 100%;
+            max-width: 480px;
+            max-height: 85vh;
+            background: #FFF;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            padding: 24px 20px;
+            overflow-y: auto;
+            animation: slideUp
