@@ -265,4 +265,273 @@
             border-top-right-radius: 24px;
             padding: 24px 20px;
             overflow-y: auto;
-            animation: slideUp
+            animation: slideUp 0.3s ease-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .btn-close {
+            background: #F3F4F6;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--text-sub);
+            font-size: 1rem;
+        }
+
+        /* 案例清單項目 */
+        .portfolio-item {
+            padding: 14px;
+            background: #F9FAFB;
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            border: 1px solid #F3F4F6;
+        }
+        .portfolio-item-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+        .portfolio-item-desc {
+            font-size: 0.85rem;
+            color: #4B5563;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .portfolio-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            background: rgba(31, 183, 166, 0.1);
+            color: var(--brand-teal-dark);
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* 頁尾 */
+        .footer-text {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <!-- 品牌標頭 -->
+        <div class="brand-bar">
+            <div class="brand-logo-text">LUXURWIND</div>
+            <div class="brand-sub">拉蒂設計</div>
+        </div>
+
+        <!-- 個人資訊 (預設內容與試算表同步) -->
+        <div class="profile-header">
+            <div class="avatar-wrapper">
+                <div class="avatar-ring"></div>
+                <img id="avatar" class="avatar-img" src="https://res.cloudinary.com/c05zlkva/image/upload/v1792724482/%E5%A4%A7%E9%A0%AD%E8%B2%BC.jpg" alt="吳貞妮 Linno">
+            </div>
+            <h1 id="profile-name" class="profile-name">吳貞妮 Linno</h1>
+            <div id="profile-title" class="profile-title">拉蒂設計 創辦人 / 品牌設計師</div>
+            <div id="profile-slogan" class="profile-slogan">文創 × 故事 × 藝術 × 設計</div>
+        </div>
+
+        <!-- 分割線：服務與案例 -->
+        <div class="section-divider">
+            <span>三大核心服務與作品集</span>
+        </div>
+
+        <!-- 三大領域按鈕卡片 -->
+        <div class="service-card" onclick="openPortfolio('brand')">
+            <div class="service-card-header">
+                <span class="service-title"><i class="fa-solid fa-palette"></i> 品牌視覺與影像數位</span>
+            </div>
+            <div class="service-desc">標誌識別 CIS / 商業包裝 / 貼圖 IP / 影音動畫</div>
+        </div>
+
+        <div class="service-card" onclick="openPortfolio('story')">
+            <div class="service-card-header">
+                <span class="service-title"><i class="fa-solid fa-book-open"></i> 故事劇場與情境策畫</span>
+            </div>
+            <div class="service-desc">展覽主視覺 / 文化繪本 / 節慶故事禮品</div>
+        </div>
+
+        <div class="service-card" onclick="openPortfolio('event')">
+            <div class="service-card-header">
+                <span class="service-title"><i class="fa-solid fa-wand-magic-sparkles"></i> 活動整合與互動體驗</span>
+            </div>
+            <div class="service-desc">展場 AI 互動 IP / 跨域營隊 / ESG 體驗課程 / 似顏繪</div>
+        </div>
+
+        <!-- 快捷動作按鈕 -->
+        <div class="action-grid">
+            <a id="line-link" href="https://line.me/ti/p/~kkk112233k" target="_blank" class="btn-action line">
+                <i class="fa-brands fa-line"></i>
+                加 LINE
+            </a>
+            <button onclick="shareCard()" class="btn-action share">
+                <i class="fa-solid fa-share-nodes"></i>
+                分享名片
+            </button>
+        </div>
+
+        <div class="footer-text">
+            © 2026 Luxurwind. All rights reserved.
+        </div>
+    </div>
+
+    <!-- 作品集彈窗 Modal -->
+    <div id="portfolio-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="modal-category-title" class="modal-title">案例展示</div>
+                <button class="btn-close" onclick="closePortfolio()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="modal-portfolio-list">
+                <!-- 動態注入案例清單 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GOOGLE_SHEET_ID = '1g7_HsReMbti7OlpdnoMkUfrNd6G4TsyBReo9PW9SO-8';
+
+        // 預設完整的 18 個案例，確保畫面不卡住白屏
+        let portfolioData = {
+            brand: [
+                { title: '臻豪邁肉乾禮盒', desc: '品牌識別及包裝設計', tag: 'CIS / 包裝' },
+                { title: '臻鑽咖啡', desc: '品牌 LOGO 及包裝設計', tag: 'CIS / 包裝' },
+                { title: '臻御行', desc: '180萬下載量官方貼圖設計', tag: '貼圖 IP / 商業插畫' },
+                { title: '張鶴曦藝人專輯', desc: 'LOGO 及社群封面設計', tag: '專輯視覺 / 社群' },
+                { title: '原住民電視台-破浪三百', desc: '節目片頭 LOGO 設計', tag: '節目識別 / LOGO' },
+                { title: '老人協會', desc: '活動舞台視覺設計', tag: '舞台視覺 / 平面規範' },
+                { title: '原住民電視台', desc: '繪本動態動畫製作', tag: '動態製作 / 影音' },
+                { title: '欣桃天然氣', desc: '網頁插畫視覺設計', tag: '網頁視覺 / 商業插畫' }
+            ],
+            story: [
+                { title: '台北市木柵動物園馬特展', desc: '展覽插畫主視覺+手遊界面&插畫+桌遊卡牌設計', tag: '展覽 IP / 桌遊卡牌' },
+                { title: '台北市煥民新村', desc: '展場主視覺插畫設計', tag: '眷村文化 / 展覽插畫' },
+                { title: '新北市育兒寶貝袋', desc: '繪本插畫設計', tag: '兒童繪本 / 故事插畫' },
+                { title: '台北市101大樓茶包明信片', desc: '封面插畫設計', tag: '文化禮品 / 故事明信片' },
+                { title: '海龜不哭', desc: '插畫主視覺設計', tag: '故事繪本 / 品牌 IP' }
+            ],
+            event: [
+                { title: '活動展場情境式AI互動IP營造', desc: '商業跨界合作，AI 技術與展場沉浸式互動', tag: 'AI 科技 / 展場互動' },
+                { title: 'AI繪本故事創作營', desc: '兒童跨域藝術教學營隊課程', tag: '跨域教學 / AI營隊' },
+                { title: '海龜不哭', desc: '網頁視覺設計與海廢 DIY 創意手作體驗 (ESG)', tag: 'ESG 永續 / 手作體驗' },
+                { title: '活動現場似顏繪', desc: '現場藝術體驗互動與人像繪製', tag: '現場似顏繪 / 互動體驗' },
+                { title: 'HERS婚禮', desc: '客製化婚禮插畫與視覺設計', tag: '婚禮插畫 / 專屬紀念' }
+            ]
+        };
+
+        // 嘗試從 Google Sheet 抓取最新資料（非同步背景更新）
+        async function loadSheetData() {
+            try {
+                const resProfile = await fetch(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=Profile`);
+                if (resProfile.ok) {
+                    const text = await resProfile.text();
+                    const json = JSON.parse(text.substring(47, text.length - 2));
+                    json.table.rows.forEach(r => {
+                        const key = r.c && r.c[0] ? r.c[0].v : '';
+                        const val = r.c && r.c[1] ? r.c[1].v : '';
+                        if (key === 'name' && val) document.getElementById('profile-name').innerText = val;
+                        if (key === 'title' && val) document.getElementById('profile-title').innerText = val;
+                        if (key === 'slogan' && val) document.getElementById('profile-slogan').innerText = val;
+                        if (key === 'avatar' && val) document.getElementById('avatar').src = val;
+                        if (key === 'lineId' && val) document.getElementById('line-link').href = `https://line.me/ti/p/~${val}`;
+                    });
+                }
+            } catch (e) {
+                console.log('Profile 自動切換預設資料');
+            }
+
+            try {
+                const resPortfolio = await fetch(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&sheet=Portfolio`);
+                if (resPortfolio.ok) {
+                    const text = await resPortfolio.text();
+                    const json = JSON.parse(text.substring(47, text.length - 2));
+                    let newPortfolio = { brand: [], story: [], event: [] };
+                    json.table.rows.forEach((r, idx) => {
+                        if (idx === 0) return;
+                        const cat = r.c && r.c[0] ? r.c[0].v.toLowerCase() : '';
+                        const title = r.c && r.c[1] ? r.c[1].v : '';
+                        const desc = r.c && r.c[2] ? r.c[2].v : '';
+                        const tag = r.c && r.c[3] ? r.c[3].v : '';
+                        if (newPortfolio[cat]) {
+                            newPortfolio[cat].push({ title, desc, tag });
+                        }
+                    });
+                    if (newPortfolio.brand.length > 0) portfolioData = newPortfolio;
+                }
+            } catch (e) {
+                console.log('Portfolio 自動切換預設資料');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSheetData();
+        });
+
+        function openPortfolio(category) {
+            const titles = {
+                brand: '🎨 品牌視覺與影像數位',
+                story: '📖 故事劇場與情境策畫',
+                event: '🎪 活動整合與互動體驗'
+            };
+
+            document.getElementById('modal-category-title').innerText = titles[category];
+            const listContainer = document.getElementById('modal-portfolio-list');
+            listContainer.innerHTML = '';
+
+            const items = portfolioData[category] || [];
+            items.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'portfolio-item';
+                el.innerHTML = `
+                    <div class="portfolio-item-title">${item.title}</div>
+                    <div class="portfolio-item-desc">${item.desc}</div>
+                    <span class="portfolio-tag"># ${item.tag}</span>
+                `;
+                listContainer.appendChild(el);
+            });
+
+            document.getElementById('portfolio-modal').classList.add('active');
+        }
+
+        function closePortfolio() {
+            document.getElementById('portfolio-modal').classList.remove('active');
+        }
+
+        function shareCard() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '吳貞妮 Linno | 拉蒂設計',
+                    text: '這是拉蒂設計創辦人 吳貞妮 Linno 的個人數位電子名片',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('已複製名片網址至剪貼簿！');
+            }
+        }
+    </script>
+</body>
+</html>
