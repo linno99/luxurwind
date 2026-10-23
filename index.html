@@ -372,11 +372,6 @@
         const LIFF_ID = '2012168875-2P11bla1';
         const SITE_URL = 'https://linno99.github.io/luxurwind/';
 
-        // true ：LINE 卡片按鈕先到本站 ?go=，再依試算表「最新」Link 跳轉
-        //        （好處：已經傳出去的舊卡片，之後改試算表連結也會生效）
-        // false：LINE 卡片按鈕直接寫死試算表當下的 Link（少一次跳轉，但舊卡片不會更新）
-        const USE_REDIRECT = true;
-
         const CATS = {
             brand: { icon: '🎨', name: '品牌視覺與影像數位', color: '#0D9488' },
             story: { icon: '📖', name: '故事劇場與情境策畫', color: '#E05638' },
@@ -474,7 +469,7 @@
             }
         }
 
-        const BUILD = 'v2.1';
+        const BUILD = 'v2.2';
         let dataSource = 'fallback';
         const dataReady = loadSheetData().then(() => {
             const el = document.getElementById('build-info');
@@ -494,11 +489,6 @@
         // ====== LINE Flex 卡片（單一 bubble）======
         function clip(s, n) { s = String(s || ''); return s.length > n ? s.slice(0, n - 1) + '…' : s; }
 
-        function caseUri(item) {
-            if (!USE_REDIRECT && item.link) return item.link;
-            return `${SITE_URL}?go=${encodeURIComponent(item.cat + '|' + item.title)}`;
-        }
-
         function buildFlex() {
             const name = document.getElementById('profile-name').innerText;
             const title = document.getElementById('profile-title').innerText;
@@ -516,42 +506,21 @@
                     ]
                 },
                 { type: 'separator', margin: 'lg' },
-                { type: 'text', text: '點選案例即可查看作品', size: 'xs', color: '#9CA3AF', margin: 'md' }
+                { type: 'text', text: '請選擇服務項目，查看作品案例', size: 'xs', color: '#9CA3AF', margin: 'md' },
+                {
+                    type: 'box', layout: 'vertical', spacing: 'sm', margin: 'md',
+                    contents: Object.keys(CATS).map(cat => ({
+                        type: 'button', style: 'secondary', height: 'sm',
+                        action: { type: 'uri', label: `${CATS[cat].icon} ${CATS[cat].name}`, uri: `${SITE_URL}?cat=${cat}` }
+                    }))
+                }
             ];
-
-            Object.keys(CATS).forEach(cat => {
-                const items = portfolioData[cat] || [];
-                if (!items.length) return;
-                const meta = CATS[cat];
-                body.push({
-                    type: 'text', text: `${meta.icon} ${meta.name}`,
-                    weight: 'bold', size: 'sm', color: meta.color, margin: 'xl', wrap: true
-                });
-                items.forEach(item => {
-                    body.push({
-                        type: 'box', layout: 'horizontal', margin: 'sm',
-                        paddingAll: 'md', cornerRadius: 'md', backgroundColor: '#F3F4F6',
-                        action: { type: 'uri', label: clip(item.title, 20), uri: caseUri(item) },
-                        contents: [
-                            {
-                                type: 'box', layout: 'vertical', flex: 1, spacing: 'xs',
-                                contents: [
-                                    { type: 'text', text: item.title, size: 'sm', weight: 'bold', wrap: true, color: '#1F2937' },
-                                    { type: 'text', text: item.tag || item.desc || ' ', size: 'xxs', color: '#6B7280', wrap: true }
-                                ]
-                            },
-                            { type: 'text', text: '›', size: 'xl', color: meta.color, flex: 0, align: 'end', gravity: 'center' }
-                        ]
-                    });
-                });
-            });
 
             return {
                 type: 'flex',
                 altText: clip(`${name}｜拉蒂設計 數位名片與作品案例`, 100),
                 contents: {
                     type: 'bubble',
-                    size: 'giga',
                     header: {
                         type: 'box', layout: 'vertical', backgroundColor: '#0D9488',
                         contents: [{ type: 'text', text: 'LUXURWIND 數位名片', color: '#FFFFFF', weight: 'bold', size: 'sm', align: 'center' }]
@@ -591,12 +560,13 @@
         }
 
         // ====== 作品集彈窗 ======
-        function renderItem(item, withThumb) {
+        function renderItem(item, opts) {
+            opts = opts || {};
             const el = document.createElement(item.link ? 'a' : 'div');
             el.className = 'portfolio-item';
             if (item.link) { el.href = item.link; el.target = '_blank'; el.rel = 'noopener'; }
 
-            if (item.image && withThumb !== false) {
+            if (item.image) {
                 const img = document.createElement('img');
                 img.className = 'portfolio-thumb';
                 img.src = item.image;
@@ -627,6 +597,12 @@
                 go.className = 'portfolio-go';
                 go.textContent = '查看作品 ›';
                 el.appendChild(go);
+            } else if (opts.pending) {
+                const wait = document.createElement('span');
+                wait.className = 'portfolio-go';
+                wait.style.color = '#9CA3AF';
+                wait.textContent = '作品連結更新中';
+                el.appendChild(wait);
             }
             return el;
         }
@@ -638,7 +614,7 @@
             document.getElementById('modal-category-title').innerText = `${meta.icon} ${meta.name}`;
             const list = document.getElementById('modal-portfolio-list');
             list.innerHTML = '';
-            (portfolioData[category] || []).forEach(item => list.appendChild(renderItem(item)));
+            (portfolioData[category] || []).forEach(item => list.appendChild(renderItem(item, { pending: true })));
             document.getElementById('portfolio-modal').classList.add('active');
         }
 
@@ -687,13 +663,64 @@
             }
         }
 
+        // ====== 從 LINE 卡片的服務按鈕進來（?cat=）：直接顯示該類別的案例清單，不顯示整張名片 ======
+        async function handleCat(cat) {
+            document.body.classList.add('go-mode');
+            const meta = CATS[cat];
+            const box = document.getElementById('go-screen');
+            box.innerHTML = '<div class="go-card"><div class="go-status">載入作品中…</div></div>';
+
+            await dataReady;
+
+            const card = document.createElement('div');
+            card.className = 'go-card';
+
+            const head = document.createElement('div');
+            head.className = 'modal-header';
+            const ttl = document.createElement('div');
+            ttl.className = 'modal-title';
+            ttl.textContent = `${meta.icon} ${meta.name}`;
+            head.appendChild(ttl);
+            card.appendChild(head);
+
+            const items = portfolioData[cat] || [];
+            if (!items.length) {
+                const empty = document.createElement('div');
+                empty.className = 'go-status';
+                empty.textContent = '案例整理中，敬請期待';
+                card.appendChild(empty);
+            }
+            items.forEach(item => card.appendChild(renderItem(item, { pending: true })));
+
+            const actions = document.createElement('div');
+            actions.className = 'go-actions';
+            Object.keys(CATS).filter(k => k !== cat).forEach(k => {
+                const a = document.createElement('a');
+                a.className = 'btn-action';
+                a.href = `${SITE_URL}?cat=${k}`;
+                a.textContent = `${CATS[k].icon} ${CATS[k].name}`;
+                actions.appendChild(a);
+            });
+            const home = document.createElement('a');
+            home.className = 'btn-action';
+            home.href = SITE_URL;
+            home.textContent = '查看完整名片';
+            actions.appendChild(home);
+            card.appendChild(actions);
+
+            box.innerHTML = '';
+            box.appendChild(card);
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
+
+            // 舊版卡片的單一案例按鈕（?go=分類|案例名稱）仍可使用
             const go = params.get('go');
             if (go && go.indexOf('|') > 0) { handleGo(go); return; }
 
             const cat = params.get('cat');
-            if (cat && CATS[cat]) setTimeout(() => openPortfolio(cat), 300);
+            if (cat && CATS[cat]) { handleCat(cat); return; }
         });
     </script>
 </body>
