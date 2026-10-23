@@ -368,7 +368,7 @@
             <div class="service-desc">展場 AI 互動 IP / 跨域營隊 / ESG 體驗課程 / 似顏繪</div>
         </div>
 
-        <!-- 快捷動作按鈕 -->
+        <!-- 網頁上的底部按鈕：加 LINE & 分享卡片 -->
         <div class="action-grid">
             <a id="line-link" href="https://line.me/ti/p/~kkk112233k" target="_blank" class="btn-action line">
                 <i class="fa-brands fa-line"></i>
@@ -407,7 +407,7 @@
             loadSheetData();
         });
 
-        // 分享單頁精華卡片 (Single Bubble Flex Message) 至 LINE 聊天室
+        // 點擊網頁上的「分享卡片」按鈕時觸發的 Flex Message 產生與轉發
         async function shareFlexCard() {
             if (!liff.isLoggedIn()) {
                 liff.login();
@@ -455,9 +455,30 @@
                                         layout: "vertical",
                                         spacing: "sm",
                                         contents: [
-                                            { type: "text", text: "🎨 品牌視覺：肉乾禮盒、咖啡包裝、貼圖IP", size: "xs", color: "#333333", wrap: true },
-                                            { type: "text", text: "📖 故事策畫：動物園特展、文化繪本、IP", size: "xs", color: "#333333", wrap: true },
-                                            { type: "text", text: "🎪 活動體驗：AI互動營、ESG手作、似顏繪", size: "xs", color: "#333333", wrap: true }
+                                            {
+                                                type: "text",
+                                                text: "🎨 品牌視覺：肉乾禮盒、咖啡包裝、貼圖IP",
+                                                size: "xs",
+                                                color: "#1F2937",
+                                                wrap: true,
+                                                action: { type: "uri", uri: window.location.href }
+                                            },
+                                            {
+                                                type: "text",
+                                                text: "📖 故事策畫：動物園特展、文化繪本、IP",
+                                                size: "xs",
+                                                color: "#1F2937",
+                                                wrap: true,
+                                                action: { type: "uri", uri: window.location.href }
+                                            },
+                                            {
+                                                type: "text",
+                                                text: "🎪 活動體驗：AI互動營、ESG手作、似顏繪",
+                                                size: "xs",
+                                                color: "#1F2937",
+                                                wrap: true,
+                                                action: { type: "uri", uri: window.location.href }
+                                            }
                                         ]
                                     }
                                 ]
@@ -476,7 +497,7 @@
                                     {
                                         type: "button",
                                         style: "secondary",
-                                        action: { type: "uri", label: "查看完整網站", uri: window.location.href }
+                                        action: { type: "uri", label: "分享卡片", uri: `https://liff.line.me/${LIFF_ID}` }
                                     }
                                 ]
                             }
